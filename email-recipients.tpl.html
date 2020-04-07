@@ -1,0 +1,27 @@
+<div id="EmailRecipients" class="row email-recipients-directive">
+    <div class="col-sm-12">
+        <!-- Mobile -->
+        <div class="row list-container">
+            <div class="col-sm-12 form-group recipient" ng-class="{error: $ctrl.isDirty && !$ctrl.isValid}">
+                <label class="input-label">
+                <span>
+                    Recipient's Email
+                </span>
+                </label>
+
+                <ui-select tag-on-blur multiple tagging="$ctrl.transformEmail" tagging-tokens="SPACE|ENTER" ui-select-style
+                           on-select="$ctrl.onItemSelected($item, $model)"
+                           on-remove="$ctrl.onItemRemoved($item, $model)"
+                           ng-model="$ctrl.recipientsViewModels"
+                           reset-search-input="true">
+                    <ui-select-match placeholder="{{'PAGES_TOP_UP_EMAIL_NOTIFICATION' | translate:'Send Email notification to'}}">
+                        <span class="tag" ng-class="{'tag-invalid':!$item.valid,'tag-valid':$item.valid}">{{$item.email}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="contact in $ctrl.contacts | filter:$select.search">
+                        <div ng-if="$select.search && contact.isTag">{{contact.email}}</div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+</div>
